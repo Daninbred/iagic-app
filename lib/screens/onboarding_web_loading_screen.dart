@@ -2,6 +2,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 import 'onboarding_web_final_screen.dart';
+import 'web_publicada_screen.dart';
 
 /// Loader de Web Developer — patrón distinto a los otros dos agentes:
 /// tiene botón "Continuar" propio, porque la generación de la web puede
@@ -55,7 +56,14 @@ class _OnboardingWebLoadingScreenState extends State<OnboardingWebLoadingScreen>
               ),
               const Spacer(),
               GestureDetector(
-                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const OnboardingWebFinalScreen())),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => WebPublicadaScreen(
+                    // AVISO: URL de ejemplo — la real depende de que n8n
+                    // guarde landing_url tras publicar en Netlify (pendiente).
+                    url: 'https://tuempresa.netlify.app',
+                    onContinuar: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const OnboardingWebFinalScreen())),
+                  ),
+                )),
                 child: Container(
                   height: 52,
                   decoration: BoxDecoration(gradient: AppGradients.primary, borderRadius: BorderRadius.circular(26)),

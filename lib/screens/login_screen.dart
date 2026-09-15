@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 import '../services/auth_service.dart';
+import 'recuperar_password_screen.dart';
 
 /// Login — a la que lleva el link "Ya tengo cuenta" desde Registro.
 class LoginScreen extends StatefulWidget {
@@ -75,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
-                    onTap: () {}, // recuperar contraseña — pendiente de pantalla propia
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const RecuperarPasswordScreen())),
                     child: Text(
                       '¿Olvidaste tu contraseña?',
                       style: TextStyle(fontSize: 12, color: AppColors.linkSoft, decoration: TextDecoration.underline),

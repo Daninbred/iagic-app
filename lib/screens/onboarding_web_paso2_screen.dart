@@ -4,6 +4,7 @@ import '../widgets/nyx_mascot.dart';
 import '../widgets/onboarding_shared.dart';
 import 'onboarding_web_loading_screen.dart';
 import 'onboarding_web_ayuda_screen.dart';
+import 'brand_kit_selector_screen.dart';
 
 /// Onboarding Web Developer — Paso 2: propósito de la página web.
 /// Los 3 valores viajan al agente para orientar la generación real.
@@ -56,7 +57,14 @@ class _OnboardingWebPaso2ScreenState extends State<OnboardingWebPaso2Screen> {
               ),
               const SizedBox(height: 16),
               GestureDetector(
-                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const OnboardingWebLoadingScreen())),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => BrandKitSelectorScreen(
+                    onContinuar: (brandKitId) {
+                      // brandKitId viaja a perfil_negocio.brand_kit_id — pendiente en n8n
+                      Navigator.of(context).push(MaterialPageRoute(builder: (_) => const OnboardingWebLoadingScreen()));
+                    },
+                  ),
+                )),
                 child: Container(
                   height: 52,
                   decoration: BoxDecoration(gradient: AppGradients.primary, borderRadius: BorderRadius.circular(26)),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 import '../theme/app_theme.dart';
 import '../services/auth_service.dart';
 import 'confirmacion_email_screen.dart';
+import 'terminos_screen.dart';
 
 /// Alta con email — email + contraseña + confirmar + checkbox de Términos.
 /// El botón "Continuar" se activa solo cuando el checkbox está marcado
@@ -114,12 +116,12 @@ class _AltaEmailScreenState extends State<AltaEmailScreen> {
                   Text(_error!, style: AppTextStyles.caption.copyWith(color: AppColors.error)),
                 ],
                 const SizedBox(height: 20),
-                GestureDetector(
-                  onTap: () => setState(() => _acceptedTerms = !_acceptedTerms),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    GestureDetector(
+                      onTap: () => setState(() => _acceptedTerms = !_acceptedTerms),
+                      child: Container(
                         width: 18,
                         height: 18,
                         margin: const EdgeInsets.only(top: 2, right: 10),
@@ -130,7 +132,10 @@ class _AltaEmailScreenState extends State<AltaEmailScreen> {
                         ),
                         child: _acceptedTerms ? const Icon(Icons.check, size: 13, color: Colors.white) : null,
                       ),
-                      Expanded(
+                    ),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () => setState(() => _acceptedTerms = !_acceptedTerms),
                         child: Text.rich(
                           TextSpan(
                             text: 'Al continuar aceptas nuestros ',
@@ -138,14 +143,16 @@ class _AltaEmailScreenState extends State<AltaEmailScreen> {
                             children: [
                               TextSpan(
                                 text: 'términos del servicio y política de privacidad',
-                                style: TextStyle(color: AppColors.linkSoft, decoration: TextDecoration.underline, fontSize: 12),
+                                style: const TextStyle(color: AppColors.linkSoft, decoration: TextDecoration.underline, fontSize: 12),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const TerminosScreen())),
                               ),
                             ],
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 28),
                 _GradientBorderButton(

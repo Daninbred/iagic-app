@@ -43,4 +43,12 @@ class AuthService {
   Future<void> resendConfirmationEmail(String email) {
     return _client.auth.resend(type: OtpType.signup, email: email);
   }
+
+  Future<void> signOut() {
+    return _client.auth.signOut();
+  }
+
+  Future<void> resetPasswordForEmail(String email) {
+    return _client.auth.resetPasswordForEmail(email);
+  }
 }
